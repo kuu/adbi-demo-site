@@ -1,0 +1,46 @@
+{% extends 'layout.tpl.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="/scripts/player/html5-skin.min.css">
+<script src="/scripts/player/core.min.js"></script>
+<script src="/scripts/player/main_html5.min.js"></script>
+<script src="/scripts/player/bit_wrapper.min.js"></script>
+<script src="/scripts/player/osmf_flash.min.js"></script>
+<script src="/scripts/player/discovery_api.min.js"></script>
+<script src="/scripts/player/html5-skin.min.js"></script>
+<div class="myoo-player-section">
+  <p class="myoo-player-section__description" id="title"></p>
+  <div class="myoo-player-container">
+    <div id="container" class="myoo-player"></div>
+  </div>
+  <p class="myoo-player-section__description" id="description"></p>
+</div>
+<script>
+OO.ready(() => {
+  var titleElem = document.querySelector('#title');
+  var descriptionElem = document.querySelector('#description');
+  OO.Player.create(
+    'container',
+    '{{embedCode}}',
+    {
+      pcode: '{{pcode}}',
+      playerBrandingId: '{{playerBrandingId}}',
+      embedToken: '{% autoescape false %}{{embedToken}}{% endautoescape %}',
+      debug: true,
+      autoPlay: true,
+      skin: {
+        // config contains the configuration setting for player skin. Change this path to your local config when necessary.
+        config: '/scripts/player/skin.json'
+      },
+      onCreate: function (player) {
+        player.mb.subscribe(OO.EVENTS.PLAYBACK_READY, 'demo', function () {
+          var metadata = player.getItem();
+          titleElem.textContent = metadata.title;
+          descriptionElem.textContent = metadata.description;
+        });
+      }
+    }
+  );
+});
+</script>
+{% endblock %}
