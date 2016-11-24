@@ -1,15 +1,13 @@
-# sssr-server
-Realtime comment posting demo
+# adbi-demo-site
+A demo web site for ADBI
 
 ## Prerequisite
 git, Node.js version 6+
 
 ## Install
 ```
-$ git clone git@github.com:kuu/realtime-comment-demo.git
-$ cd realtime-comment-demo
-$ git submodule init
-$ git submodule update
+$ git clone git@github.com:kuu/adbi-demo-site.git
+$ cd adbi-demo-site
 $ npm install
 $ npm run build
 ```
